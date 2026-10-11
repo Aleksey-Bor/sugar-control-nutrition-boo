@@ -3,1105 +3,1227 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Книга-памятка: Здоровое питание для контроля сахара</title>
+<title>Здоровое питание для контроля сахара — книга-памятка</title>
 <style>
   :root{
     --paper: #fbf9f4;
-    --paper-2: #f4f0e6;
-    --ink: #22271f;
-    --ink-soft: #5b6653;
-    --green-900: #1f4d3a;
-    --green-700: #2f6b4f;
-    --green-500: #4f9b6a;
-    --green-100: #e7f2ea;
-    --red-700: #a83b2c;
-    --red-100: #fbeae6;
-    --gold: #b98b3c;
-    --sans: 'Segoe UI', 'Helvetica Neue', Arial, 'Noto Sans', sans-serif;
-    --serif: Georgia, 'Iowan Old Style', 'Palatino Linotype', 'Times New Roman', serif;
+    --paper-2: #f4f1e8;
+    --card: #ffffff;
+    --ink: #23231f;
+    --ink-soft: #5c5d55;
+    --green: #3f8f68;
+    --green-deep: #1d4535;
+    --green-mid: #2f6b4f;
+    --green-light: #e7f1e9;
+    --amber: #b57d16;
+    --amber-light: #f8eed6;
+    --red: #a83a2f;
+    --red-light: #f8e0dd;
+    --line: #e2ddce;
+    --line-strong: #cfc8b4;
+    --shadow: 0 24px 60px -34px rgba(29,69,53,.45);
+    --sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --serif: Georgia, "Iowan Old Style", "Times New Roman", "PT Serif", serif;
   }
 
-  *,*::before,*::after{ box-sizing: border-box; }
+  *{ box-sizing: border-box; }
 
   html{ scroll-behavior: smooth; }
 
   body{
     margin:0;
-    font-family: var(--serif);
-    color: var(--ink);
-    background-color:#eef1ea;
+    padding:0;
+    background-color: var(--paper);
     background-image:
-      radial-gradient(circle at 18% 8%, rgba(79,155,106,.16), transparent 42%),
-      radial-gradient(circle at 88% 82%, rgba(185,139,60,.13), transparent 48%),
-      radial-gradient(circle at 50% 50%, rgba(255,255,255,.6), transparent 70%);
-    background-attachment: fixed;
+      radial-gradient(rgba(63,143,104,.07) 1px, transparent 1px),
+      radial-gradient(rgba(181,125,22,.06) 1px, transparent 1px);
+    background-size: 26px 26px, 26px 26px;
+    background-position: 0 0, 13px 13px;
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: clamp(1rem, 0.94rem + 0.32vw, 1.13rem);
+    line-height: 1.75;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
 
-  .page{ display:none; }
+  /* ============ TOP BAR ============ */
+  .topbar{
+    position: sticky;
+    top: 0;
+    z-index: 60;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: .55rem clamp(.8rem, 3vw, 1.6rem);
+    background: rgba(251,249,244,.88);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .topbar.hidden{ display: none; }
 
-  /* ---------- Титульный лист ---------- */
-  #page-title{
-    display:flex;
-    min-height:100vh;
-    align-items:center;
-    justify-content:center;
-    padding: clamp(32px, 6vw, 72px) 20px;
-    text-align:center;
-    color:#f2efe4;
-    position:relative;
-    overflow:hidden;
-    background:
-      radial-gradient(circle at 50% -12%, #357455 0%, transparent 55%),
-      radial-gradient(circle at 88% 108%, #1d4a37 0%, transparent 58%),
-      linear-gradient(160deg, #1b3d2e 0%, #14301f 58%, #0f2417 100%);
-  }
-  #page-title::after{
-    content:'';
-    position:absolute; inset:0;
-    background-image: radial-gradient(rgba(255,255,255,.055) 1px, transparent 1px);
-    background-size: 24px 24px;
-    pointer-events:none;
-  }
-
-  .title-inner{
-    position:relative;
-    z-index:2;
-    max-width: 740px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap: clamp(12px, 2.2vw, 20px);
-  }
-
-  .plate-wrap{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:14px;
-    margin-bottom: 4px;
-  }
-  .plate{
-    width: clamp(148px, 32vw, 208px);
-    height: clamp(148px, 32vw, 208px);
-    border-radius:50%;
-    background: conic-gradient(from -90deg,
-      #7fc98d 0deg 180deg,
-      #e9a273 180deg 270deg,
-      #e5c96f 270deg 360deg);
-    border: clamp(8px, 1.8vw, 12px) solid rgba(248,246,238,.94);
-    box-shadow:
-      0 0 0 1px rgba(255,255,255,.22),
-      0 20px 50px rgba(0,0,0,.38),
-      0 0 70px rgba(127,201,141,.30);
-    animation: float 7s ease-in-out infinite;
-  }
-  @keyframes float{
-    0%,100%{ transform: translateY(0); }
-    50%{ transform: translateY(-10px); }
-  }
-  .plate-caption{
+  .topbar-title{
     font-family: var(--sans);
-    font-size: .74rem;
-    letter-spacing:.07em;
-    color:#a9c9b5;
-    margin:0;
-    text-align:center;
+    font-size: clamp(.78rem, .72rem + .3vw, .92rem);
+    font-weight: 700;
+    letter-spacing: .02em;
+    color: var(--green-deep);
+    background: none;
+    border: none;
+    padding: .5rem .2rem;
+    cursor: pointer;
+    text-align: left;
+    line-height: 1.25;
+    transition: color .25s ease;
   }
+  .topbar-title:hover{ color: var(--green); }
 
-  .eyebrow{
-    font-family: var(--sans);
-    text-transform:uppercase;
-    letter-spacing:.3em;
-    font-size: clamp(.68rem, 1.6vw, .78rem);
-    font-weight:700;
-    color:#9fd4b0;
-    margin:0;
-  }
-
-  #page-title h1{
-    font-size: clamp(1.95rem, 6vw, 3.5rem);
-    line-height:1.1;
-    letter-spacing:-.012em;
-    color:#ffffff;
-    margin:0;
-    text-shadow: 0 2px 24px rgba(0,0,0,.35);
-  }
-
-  .lede{
-    font-family: var(--sans);
-    font-size: clamp(.98rem, 2.2vw, 1.12rem);
-    line-height:1.65;
-    color:#d6e4d9;
-    max-width:56ch;
-    margin:0;
-  }
-
-  /* ---------- Книга ---------- */
-  .book{
-    max-width: 900px;
-    margin: 0 auto;
-    padding: clamp(16px, 3vw, 36px) clamp(12px, 2.5vw, 24px) clamp(44px, 6vw, 76px);
-  }
-  .book-inner{
-    background: var(--paper);
-    border: 1px solid rgba(47,107,79,.09);
-    border-radius: 22px;
-    padding: clamp(22px, 5vw, 64px);
-    box-shadow:
-      0 18px 60px rgba(31,77,58,.13),
-      0 1px 0 rgba(255,255,255,.9) inset;
-  }
-
-  /* ---------- Хлебные крошки ---------- */
-  .breadcrumbs{
-    font-family: var(--sans);
-    font-size: .82rem;
-    color: var(--ink-soft);
-    display:flex;
-    flex-wrap:wrap;
-    align-items:center;
-    gap:7px;
-    margin-bottom: clamp(18px, 3vw, 28px);
-  }
-  .breadcrumbs a{
-    color: var(--green-700);
-    text-decoration:none;
-    cursor:pointer;
-    border-bottom:1px solid transparent;
-    transition: border-color .2s ease, color .2s ease;
-  }
-  .breadcrumbs a:hover{ border-color: currentColor; }
-  .breadcrumbs .sep{ opacity:.45; }
-  .breadcrumbs .current{ color: var(--ink-soft); font-weight:600; }
-
-  /* ---------- Заголовки главы ---------- */
-  .chapter-kicker{
-    font-family: var(--sans);
-    text-transform:uppercase;
-    letter-spacing:.2em;
-    font-size:.72rem;
-    font-weight:700;
-    color: var(--green-500);
-    margin:0 0 10px;
-  }
-  h2.chapter-title{
-    font-size: clamp(1.5rem, 4.2vw, 2.15rem);
-    line-height:1.22;
-    letter-spacing:-.01em;
-    color: var(--green-900);
-    margin:0 0 12px;
-  }
-  .chapter-sub{
-    font-family: var(--sans);
-    font-size: clamp(.9rem, 2vw, 1rem);
-    line-height:1.6;
-    color: var(--ink-soft);
-    margin:0 0 clamp(22px, 3.4vw, 32px);
-    padding-bottom: clamp(14px, 2.5vw, 20px);
-    border-bottom:1px solid rgba(47,107,79,.15);
-  }
-
-  /* ---------- Основной текст ---------- */
-  .book-text p{
-    font-size: clamp(1.02rem, 1.55vw, 1.12rem);
-    line-height:1.78;
-    text-align: justify;
-    text-indent: 1.6em;
-    hyphens: auto;
-    margin: 0 0 1.05em;
-  }
-  .book-text > p:first-of-type{ text-indent:0; }
-  .book-text > p:first-of-type::first-letter{
-    float:left;
-    font-size: 3.1em;
-    line-height:.86;
-    padding: .06em .1em 0 0;
-    color: var(--green-700);
-  }
-
-  .book-text h3{
-    font-family: var(--sans);
-    font-size: clamp(1.04rem, 2.4vw, 1.18rem);
-    font-weight:700;
-    color: var(--green-900);
-    letter-spacing:.01em;
-    margin: clamp(26px, 4vw, 36px) 0 12px;
-  }
-  .book-text h3::before{
-    content:'';
-    display:inline-block;
-    width:8px; height:8px;
-    border-radius:2px;
-    background: var(--green-500);
-    margin-right:10px;
-    transform: translateY(-2px) rotate(45deg);
-  }
-
-  /* ---------- Списки ---------- */
-  .book-text ul, .book-text ol{
-    list-style:none;
-    margin: 0 0 1.3em;
-    padding:0;
-  }
-
-  .rules{ counter-reset: rule; }
-  .rules li{
-    counter-increment: rule;
-    position:relative;
-    padding-left: 48px;
-    margin-bottom: 18px;
-    font-size: clamp(1rem, 1.5vw, 1.08rem);
-    line-height:1.72;
-    text-align:left;
-  }
-  .rules li::before{
-    content: counter(rule, decimal-leading-zero);
-    position:absolute;
-    left:0; top:.1em;
-    width:32px; height:32px;
-    display:flex; align-items:center; justify-content:center;
-    font-family: var(--sans);
-    font-size:.76rem;
-    font-weight:700;
-    color: var(--green-700);
-    background: var(--green-100);
-    border-radius:50%;
-  }
-
-  .dot-list li{
-    position:relative;
-    padding-left: 26px;
-    margin-bottom: 14px;
-    font-size: clamp(1rem, 1.5vw, 1.08rem);
-    line-height:1.72;
-    text-align:left;
-  }
-  .dot-list li::before{
-    content:'';
-    position:absolute;
-    left:2px; top:.62em;
-    width:9px; height:9px;
-    border-radius:50%;
-    background: var(--green-500);
-  }
-
-  /* ---------- Врезка ---------- */
-  .callout{
-    background: linear-gradient(135deg, #fdf7e8, #faf0d6);
-    border-left:4px solid var(--gold);
-    border-radius: 12px;
-    padding: 16px 20px;
-    margin: 26px 0;
-  }
-  .callout p{
-    text-indent:0;
-    margin:0;
-    font-size: clamp(.98rem, 1.5vw, 1.06rem);
-    line-height:1.7;
-  }
-
-  /* ---------- Светофор продуктов ---------- */
-  .switcher{
-    display:grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 14px;
-    margin: 14px 0 10px;
-  }
-  .sw-card{
-    border-radius: 14px;
-    padding: 16px 18px;
-    border-left: 4px solid;
-  }
-  .sw-green{ background: var(--green-100); border-color: var(--green-500); }
-  .sw-red{ background: var(--red-100); border-color: var(--red-700); }
-
-  .sw-title{
-    font-family: var(--sans);
-    font-weight:700;
-    font-size:.8rem;
-    text-transform:uppercase;
-    letter-spacing:.09em;
-    margin:0 0 10px;
-    display:flex;
-    flex-wrap:wrap;
-    align-items:baseline;
-    gap:8px;
-  }
-  .sw-green .sw-title{ color: var(--green-700); }
-  .sw-red .sw-title{ color: var(--red-700); }
-  .sw-title span{
-    text-transform:none;
-    letter-spacing:0;
-    font-weight:500;
-    font-size:.78rem;
-    color: var(--ink-soft);
-  }
-
-  .sw-card ul{ margin:0; padding:0; list-style:none; }
-  .sw-card li{
-    position:relative;
-    padding-left: 20px;
-    margin-bottom: 8px;
-    font-size: clamp(.94rem, 1.4vw, 1rem);
-    line-height:1.6;
-    text-align:left;
-  }
-  .sw-card li:last-child{ margin-bottom:0; }
-  .sw-green li::before{
-    content:'';
-    position:absolute;
-    left:2px; top:.58em;
-    width:8px; height:8px;
-    border-radius:50%;
-    background: var(--green-500);
-  }
-  .sw-red li::before{
-    content:'';
-    position:absolute;
-    left:2px; top:.58em;
-    width:8px; height:8px;
-    background: var(--red-700);
-    transform: rotate(45deg);
-  }
-
-  /* ---------- Рецепты ---------- */
-  .recipe{
-    background:#ffffff;
-    border:1px solid rgba(47,107,79,.14);
-    border-radius: 16px;
-    padding: clamp(16px, 3vw, 26px);
-    margin: 0 0 20px;
-    box-shadow: 0 6px 20px rgba(31,77,58,.06);
-  }
-  .recipe-tag{
-    font-family: var(--sans);
-    font-size:.72rem;
-    font-weight:700;
-    text-transform:uppercase;
-    letter-spacing:.16em;
-    color: var(--green-500);
-    margin:0 0 8px;
-  }
-  .book-text h3.recipe-title{
-    margin:0 0 14px;
-    font-size: clamp(1.1rem, 2.6vw, 1.28rem);
-  }
-  .book-text h3.recipe-title::before{ content:none; }
-  .recipe p{
-    text-indent:0;
-    margin:0 0 .8em;
-  }
-  .recipe p:last-child{ margin-bottom:0; }
-
-  /* ---------- Шаги ---------- */
-  .step{ margin: 0 0 26px; }
-  .step h3{
-    font-family: var(--sans);
-    font-size: clamp(1rem, 2.2vw, 1.12rem);
-    font-weight:700;
-    color: var(--green-900);
-    margin: 0 0 10px;
-    display:flex;
-    gap:10px;
-    align-items:baseline;
-  }
-  .step h3::before{ content:none; }
-  .step h3 .num{
-    font-size:.8em;
-    letter-spacing:.08em;
-    color: var(--green-500);
-    white-space:nowrap;
-  }
-  .step .dot-list li{ margin-bottom: 12px; }
-
-  /* ---------- Содержание ---------- */
-  .toc-list{
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-    margin: clamp(18px, 3vw, 26px) 0 clamp(28px, 4vw, 38px);
-  }
-  .toc-item{
-    display:flex;
-    align-items:center;
-    gap:16px;
-    width:100%;
-    min-height:58px;
-    text-align:left;
-    background:#ffffff;
-    border:1px solid rgba(47,107,79,.14);
-    border-radius:14px;
-    padding: 15px 18px;
-    cursor:pointer;
-    font-family: var(--sans);
-    color: var(--ink);
-    transition: transform .22s ease, box-shadow .25s ease, border-color .22s ease, background-color .22s ease;
-  }
-  .toc-item:hover{
-    border-color: var(--green-500);
-    background:#f6fbf7;
-    transform: translateX(4px);
-    box-shadow: 0 10px 24px rgba(31,77,58,.10);
-  }
-  .toc-item:active{ transform: translateX(2px) scale(.995); }
-  .toc-num{
-    flex:0 0 auto;
-    min-width:44px;
-    text-align:center;
-    font-size:.78rem;
-    font-weight:700;
-    letter-spacing:.08em;
-    color: var(--green-700);
-    background: var(--green-100);
-    border-radius:9px;
-    padding:7px 9px;
-  }
-  .toc-label{
-    flex:1;
-    font-size: clamp(.94rem, 1.8vw, 1.02rem);
-    font-weight:600;
-    line-height:1.4;
-  }
-  .toc-arrow{
-    flex:0 0 auto;
-    color: var(--green-500);
-    opacity:.55;
-    transition: transform .22s ease, opacity .22s ease;
-  }
-  .toc-item:hover .toc-arrow{ transform: translateX(4px); opacity:1; }
-
-  .toc-actions{
-    display:flex;
-    gap:12px;
-    flex-wrap:wrap;
-    padding-top: clamp(18px, 3vw, 26px);
-    border-top:1px solid rgba(47,107,79,.15);
-  }
-
-  /* ---------- Кнопки ---------- */
+  /* ============ BUTTONS ============ */
   .btn{
-    font-family: var(--sans);
-    font-size:.94rem;
-    font-weight:600;
-    letter-spacing:.02em;
-    min-height:48px;
-    padding: 13px 26px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    min-height: 48px;
+    padding: .7rem 1.5rem;
     border-radius: 999px;
-    border:1.5px solid transparent;
-    cursor:pointer;
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    gap:8px;
-    -webkit-tap-highlight-color: transparent;
-    transition: transform .2s ease, box-shadow .25s ease, background-color .22s ease,
-                color .22s ease, border-color .22s ease;
+    border: 1px solid transparent;
+    font-family: var(--sans);
+    font-size: .95rem;
+    font-weight: 600;
+    letter-spacing: .01em;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform .22s ease, box-shadow .22s ease, background-color .22s ease, color .22s ease, border-color .22s ease;
   }
-  .btn:active{ transform: translateY(1px) scale(.99); }
+  .btn:focus-visible{ outline: 3px solid rgba(63,143,104,.45); outline-offset: 3px; }
+
   .btn-primary{
-    background: linear-gradient(135deg, #357a58, #1f4d3a);
-    color:#ffffff;
-    box-shadow: 0 8px 22px rgba(31,77,58,.26);
+    background: linear-gradient(135deg, var(--green) 0%, var(--green-deep) 100%);
+    color: #fff;
+    box-shadow: 0 16px 32px -18px rgba(29,69,53,.95);
   }
   .btn-primary:hover{
     transform: translateY(-2px);
-    box-shadow: 0 13px 32px rgba(31,77,58,.34);
+    box-shadow: 0 22px 40px -18px rgba(29,69,53,.95);
   }
+
   .btn-ghost{
-    background:#ffffff;
-    color: var(--green-700);
-    border-color: rgba(47,107,79,.28);
+    background: rgba(255,255,255,.7);
+    color: var(--green-deep);
+    border-color: var(--line-strong);
   }
   .btn-ghost:hover{
-    background: var(--green-100);
-    border-color: var(--green-500);
+    background: #fff;
+    border-color: var(--green);
+    color: var(--green-mid);
     transform: translateY(-2px);
-  }
-  .btn-lg{
-    padding: 17px 46px;
-    font-size: 1.02rem;
-    margin-top: 10px;
+    box-shadow: 0 14px 28px -20px rgba(29,69,53,.7);
   }
 
-  /* ---------- Навигация внизу страницы ---------- */
-  .page-nav{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:14px;
-    flex-wrap:wrap;
-    margin-top: clamp(30px, 5vw, 54px);
-    padding-top: clamp(20px, 3vw, 30px);
-    border-top:1px solid rgba(47,107,79,.15);
+  .btn-sm{ min-height: 40px; padding: .45rem 1.1rem; font-size: .85rem; }
+
+  .btn-big{
+    min-height: 58px;
+    padding: 1rem 2.6rem;
+    font-size: 1.05rem;
+    letter-spacing: .04em;
   }
 
-  /* ---------- Анимация появления ---------- */
-  .page.fade-in{ animation: fadeIn .45s ease both; }
-  @keyframes fadeIn{
-    from{ opacity:0; transform: translateY(10px); }
-    to{ opacity:1; transform: translateY(0); }
+  /* ============ PAGES ============ */
+  .page{
+    display: none;
+    animation: pageIn .5s ease both;
+  }
+  @keyframes pageIn{
+    from{ opacity: 0; transform: translateY(12px); }
+    to{ opacity: 1; transform: translateY(0); }
+  }
+
+  .wrap{
+    max-width: 780px;
+    margin: 0 auto;
+    padding: clamp(1.2rem, 4vw, 3rem) clamp(1rem, 4vw, 2rem) 4.5rem;
+  }
+
+  .card{
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    box-shadow: var(--shadow);
+    padding: clamp(1.25rem, 4vw, 2.6rem);
+  }
+
+  /* ============ TITLE PAGE ============ */
+  #page-title{
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: clamp(2rem, 7vw, 4rem) clamp(1rem, 5vw, 2rem);
+    text-align: center;
+  }
+
+  .hero{
+    max-width: 720px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(1rem, 3vw, 1.6rem);
+  }
+
+  .kicker{
+    font-family: var(--sans);
+    font-size: clamp(.72rem, .68rem + .3vw, .82rem);
+    font-weight: 700;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin: 0;
+  }
+
+  .hero h1{
+    font-family: var(--serif);
+    font-size: clamp(1.9rem, 1.2rem + 4.2vw, 3.4rem);
+    line-height: 1.15;
+    font-weight: 700;
+    color: var(--green-deep);
+    margin: 0;
+    letter-spacing: -.01em;
+  }
+
+  .hero .subtitle{
+    font-size: clamp(1rem, .92rem + .5vw, 1.22rem);
+    color: var(--ink-soft);
+    max-width: 560px;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .rule-line{
+    width: 90px;
+    height: 3px;
+    border-radius: 3px;
+    background: linear-gradient(90deg, var(--green), var(--amber));
+    margin: .2rem 0;
+  }
+
+  /* ---- CSS plate illustration ---- */
+  .plate-wrap{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.6rem;
+  }
+  .plate{
+    position: relative;
+    width: clamp(170px, 42vw, 240px);
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    background: conic-gradient(
+      from -90deg,
+      #4f9f74 0deg 90deg,
+      #68b189 90deg 180deg,
+      #c9a227 180deg 270deg,
+      #b5713c 270deg 360deg
+    );
+    box-shadow:
+      inset 0 0 0 9px #ffffff,
+      inset 0 0 0 11px rgba(29,69,53,.10),
+      0 30px 55px -30px rgba(29,69,53,.8);
+    animation: breathe 7s ease-in-out infinite;
+  }
+  .plate::after{
+    content: "";
+    position: absolute;
+    inset: -16px;
+    border-radius: 50%;
+    border: 1.5px dashed rgba(63,143,104,.45);
+    animation: spinSlow 46s linear infinite;
+  }
+  .plate::before{
+    content: "";
+    position: absolute;
+    inset: 26%;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, rgba(255,255,255,.85), rgba(255,255,255,.25));
+    box-shadow: 0 0 0 1px rgba(255,255,255,.6);
+  }
+  .plate-leaf{
+    position: absolute;
+    right: -6%;
+    bottom: 4%;
+    width: clamp(46px, 12vw, 66px);
+    height: clamp(46px, 12vw, 66px);
+    border-radius: 0 100% 0 100%;
+    background: linear-gradient(135deg, #6fbf8f, #2f6b4f);
+    box-shadow: 0 12px 24px -14px rgba(29,69,53,.9);
+    transform: rotate(-18deg);
+    animation: floatLeaf 5.5s ease-in-out infinite;
+  }
+  @keyframes breathe{
+    0%, 100%{ transform: scale(1); }
+    50%{ transform: scale(1.035); }
+  }
+  @keyframes spinSlow{
+    from{ transform: rotate(0deg); }
+    to{ transform: rotate(360deg); }
+  }
+  @keyframes floatLeaf{
+    0%, 100%{ transform: rotate(-18deg) translateY(0); }
+    50%{ transform: rotate(-10deg) translateY(-9px); }
+  }
+
+  .hero-note{
+    font-family: var(--sans);
+    font-size: clamp(.78rem, .74rem + .25vw, .88rem);
+    color: var(--ink-soft);
+    max-width: 460px;
+    line-height: 1.55;
+    margin: 0;
+    padding-top: .4rem;
+    border-top: 1px solid var(--line);
+  }
+
+  /* ============ BREADCRUMBS ============ */
+  .crumbs{
+    font-family: var(--sans);
+    font-size: clamp(.78rem, .74rem + .25vw, .87rem);
+    color: var(--ink-soft);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .3rem;
+    margin: 0 0 1.3rem;
+    padding: 0;
+    list-style: none;
+  }
+  .crumbs li{ display: flex; align-items: center; gap: .3rem; }
+  .crumbs button{
+    font: inherit;
+    background: none;
+    border: none;
+    padding: .2rem 0;
+    color: var(--green-mid);
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-underline-offset: 3px;
+    transition: color .2s ease;
+  }
+  .crumbs button:hover{ color: var(--green); }
+  .crumbs .sep{ color: var(--line-strong); }
+  .crumbs .current{
+    color: var(--green-deep);
+    font-weight: 700;
+    max-width: 60vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  /* ============ HEADINGS ============ */
+  .page-title-h{
+    font-family: var(--serif);
+    font-size: clamp(1.55rem, 1.15rem + 2.4vw, 2.4rem);
+    line-height: 1.22;
+    color: var(--green-deep);
+    margin: 0 0 .5rem;
+    letter-spacing: -.01em;
+  }
+  .page-sub{
+    font-family: var(--sans);
+    font-size: clamp(.88rem, .84rem + .3vw, .99rem);
+    color: var(--ink-soft);
+    margin: 0 0 1.6rem;
+    line-height: 1.55;
+  }
+  .page-title-h + .page-sub{
+    padding-bottom: 1.2rem;
+    border-bottom: 1px solid var(--line);
+  }
+
+  h3{
+    font-family: var(--serif);
+    font-size: clamp(1.12rem, 1rem + .7vw, 1.38rem);
+    color: var(--green-deep);
+    margin: 2.1rem 0 .85rem;
+    line-height: 1.35;
+  }
+  h3:first-of-type{ margin-top: 1.3rem; }
+
+  /* ============ PROSE ============ */
+  .prose p{
+    text-align: justify;
+    text-indent: 1.6em;
+    margin: 0 0 1.05rem;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+  }
+  .prose p:last-child{ margin-bottom: 0; }
+
+  .dropcap{ text-indent: 0 !important; }
+  .dropcap::first-letter{
+    float: left;
+    font-size: 3.1em;
+    line-height: .84;
+    font-weight: 700;
+    color: var(--green-mid);
+    padding: .06em .12em 0 0;
+  }
+
+  .callout{
+    margin: 1.6rem 0;
+    padding: 1rem 1.15rem;
+    border-radius: 14px;
+    background: var(--green-light);
+    border: 1px solid #cfe3d6;
+    border-left: 4px solid var(--green);
+    font-size: .97rem;
+    line-height: 1.65;
+    text-align: left;
+  }
+  .callout p{ text-indent: 0; margin: 0; }
+
+  strong{ color: var(--green-deep); }
+  em{ color: var(--ink-soft); }
+
+  /* ============ FOOD LISTS ============ */
+  .legend{
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    margin: 0 0 1.4rem;
+  }
+  .chip{
+    font-family: var(--sans);
+    font-size: .74rem;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    padding: .38rem .8rem;
+    border-radius: 999px;
+    border: 1px solid transparent;
+  }
+  .chip-g{ background: #e2f0e7; color: #1d4535; border-color: #bcdcc8; }
+  .chip-y{ background: var(--amber-light); color: #8a5e08; border-color: #ecd9ab; }
+  .chip-r{ background: var(--red-light); color: #8d2c22; border-color: #eec4be; }
+
+  ul.food, ul.rules, ul.steps{
+    list-style: none;
+    margin: 0 0 .4rem;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: .7rem;
+  }
+
+  ul.food li, ul.rules li, ul.steps li{
+    position: relative;
+    padding: .85rem 1.05rem .85rem 1.15rem;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--green);
+    border-radius: 12px;
+    line-height: 1.65;
+    text-align: left;
+    transition: transform .22s ease, box-shadow .22s ease;
+  }
+  ul.food li:hover, ul.rules li:hover, ul.steps li:hover{
+    transform: translateX(3px);
+    box-shadow: 0 14px 26px -22px rgba(29,69,53,.9);
+  }
+
+  ul.food li.g{ border-left-color: var(--green); background: linear-gradient(90deg, rgba(63,143,104,.08), #fff 45%); }
+  ul.food li.y{ border-left-color: var(--amber); background: linear-gradient(90deg, rgba(181,125,22,.09), #fff 45%); }
+  ul.food li.r{ border-left-color: var(--red); background: linear-gradient(90deg, rgba(168,58,47,.08), #fff 45%); }
+
+  ul.rules li{
+    border-left-color: var(--amber);
+    background: linear-gradient(90deg, rgba(181,125,22,.07), #fff 45%);
+    padding-left: 1.35rem;
+  }
+  ul.steps li{
+    border-left-color: var(--green);
+    background: linear-gradient(90deg, rgba(63,143,104,.07), #fff 45%);
+  }
+
+  .tag{
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: .68rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    padding: .22rem .6rem;
+    border-radius: 999px;
+    margin-right: .55rem;
+    vertical-align: 2px;
+    white-space: nowrap;
+  }
+  .t-g{ background: #e2f0e7; color: #1d4535; }
+  .t-y{ background: var(--amber-light); color: #8a5e08; }
+  .t-r{ background: var(--red-light); color: #8d2c22; }
+
+  /* ============ RECIPES ============ */
+  .recipe{
+    margin: 1.6rem 0 0;
+    padding: 1.2rem 1.25rem 1.35rem;
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    background: linear-gradient(180deg, #fffdf8, #fbf9f2);
+    box-shadow: 0 18px 40px -34px rgba(29,69,53,.9);
+  }
+  .recipe h3{
+    margin: 0 0 .9rem;
+    font-size: clamp(1.05rem, .98rem + .5vw, 1.25rem);
+  }
+  .recipe-label{
+    font-family: var(--sans);
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--green);
+    margin: .9rem 0 .4rem;
+    text-align: left;
+  }
+  .recipe-label:first-of-type{ margin-top: 0; }
+  .recipe ul{
+    list-style: none;
+    margin: 0 0 .2rem;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: .4rem;
+  }
+  .recipe ul li{
+    position: relative;
+    padding-left: 1.3rem;
+    line-height: 1.6;
+    text-align: left;
+  }
+  .recipe ul li::before{
+    content: "";
+    position: absolute;
+    left: .18rem;
+    top: .68em;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--green);
+    opacity: .85;
+  }
+  .recipe .prose p{
+    text-align: justify;
+    text-indent: 1.5em;
+  }
+
+  /* ============ TOC ============ */
+  .toc-list{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: .6rem;
+    counter-reset: toc;
+  }
+  .toc-item{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: .95rem;
+    text-align: left;
+    padding: .95rem 1.05rem;
+    min-height: 60px;
+    background: #fff;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    cursor: pointer;
+    font-family: var(--sans);
+    transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease, background-color .22s ease;
+  }
+  .toc-item:hover{
+    transform: translateX(5px);
+    border-color: var(--green);
+    box-shadow: 0 18px 30px -24px rgba(29,69,53,.95);
+    background: #fffdf9;
+  }
+  .toc-item:focus-visible{ outline: 3px solid rgba(63,143,104,.45); outline-offset: 3px; }
+  .toc-num{
+    flex: 0 0 auto;
+    font-size: .78rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    color: var(--green);
+    background: var(--green-light);
+    border-radius: 8px;
+    padding: .3rem .55rem;
+    min-width: 2.4rem;
+    text-align: center;
+  }
+  .toc-text{ flex: 1 1 auto; display: flex; flex-direction: column; gap: .12rem; }
+  .toc-title{
+    font-weight: 700;
+    font-size: .99rem;
+    color: var(--green-deep);
+    line-height: 1.35;
+  }
+  .toc-sub{
+    font-size: .82rem;
+    color: var(--ink-soft);
+    line-height: 1.4;
+  }
+  .toc-arrow{
+    flex: 0 0 auto;
+    color: var(--green);
+    font-size: 1.1rem;
+    transition: transform .22s ease;
+  }
+  .toc-item:hover .toc-arrow{ transform: translateX(4px); }
+
+  /* ============ NAV ROW ============ */
+  .nav-row{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: .8rem;
+    flex-wrap: wrap;
+    margin-top: 2.2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--line);
+  }
+  .nav-row .spacer{ flex: 1 1 auto; }
+
+  /* ============ FOOTER ============ */
+  .footer-note{
+    font-family: var(--sans);
+    font-size: .76rem;
+    color: var(--ink-soft);
+    text-align: center;
+    padding: 1.6rem 1rem 2.4rem;
+    line-height: 1.6;
+  }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 620px){
+    body{ line-height: 1.72; }
+    .card{ border-radius: 16px; }
+    .nav-row{
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .nav-row .btn{ width: 100%; }
+    .nav-row .spacer{ display: none; }
+    .crumbs .current{ max-width: 48vw; }
+    .topbar-title{ font-size: .76rem; }
+    ul.food li, ul.rules li, ul.steps li{ padding: .8rem .9rem .8rem .95rem; }
+    .toc-item{ padding: .85rem .9rem; gap: .7rem; }
+    .toc-num{ min-width: 2.1rem; font-size: .72rem; }
+  }
+
+  @media (max-width: 380px){
+    .tag{ display: block; margin: 0 0 .35rem; width: fit-content; }
   }
 
   @media (prefers-reduced-motion: reduce){
-    *{ animation-duration:.001ms !important; transition-duration:.001ms !important; }
-    html{ scroll-behavior:auto; }
-  }
-
-  /* ---------- Адаптивность ---------- */
-  @media (max-width: 700px){
-    .switcher{ grid-template-columns: 1fr; }
-    .page-nav{ flex-direction: column-reverse; }
-    .page-nav .btn{ width:100%; }
-    .toc-actions{ flex-direction: column; }
-    .toc-actions .btn{ width:100%; }
-    .breadcrumbs{ font-size:.78rem; }
-    .toc-item{ gap:12px; padding: 14px 14px; }
-  }
-
-  @media (max-width: 420px){
-    .book-inner{ border-radius:16px; }
-    .rules li{ padding-left: 42px; }
-    .rules li::before{ width:28px; height:28px; font-size:.7rem; }
-    .book-text > p:first-of-type::first-letter{ font-size:2.6em; }
+    *{ animation: none !important; transition: none !important; }
+    html{ scroll-behavior: auto; }
   }
 </style>
 </head>
 <body>
 
-<!-- ======================= ТИТУЛЬНЫЙ ЛИСТ ======================= -->
-<section id="page-title" class="page">
-  <div class="title-inner">
-    <div class="plate-wrap">
-      <div class="plate" aria-hidden="true"></div>
-      <p class="plate-caption">Правило тарелки: ½ — овощи · ¼ — белок · ¼ — гарнир</p>
-    </div>
-    <p class="eyebrow">Книга-памятка</p>
+<!-- ================= TOP BAR ================= -->
+<header class="topbar hidden" id="topbar">
+  <button class="topbar-title" onclick="goToPage('title')">Здоровое питание для контроля сахара</button>
+  <button class="btn btn-ghost btn-sm" onclick="goToPage('toc')">Содержание</button>
+</header>
+
+<!-- ================= TITLE PAGE ================= -->
+<section class="page" id="page-title">
+  <div class="hero">
+    <p class="kicker">Книга-памятка</p>
     <h1>Здоровое питание для контроля сахара</h1>
-    <p class="lede">Практическое руководство на каждый день: убираем резкие скачки сахара и заменяем их стабильной энергией.</p>
-    <button class="btn btn-primary btn-lg" onclick="goToPage('page-toc')">Прочитать</button>
-  </div>
-</section>
+    <div class="rule-line"></div>
+    <p class="subtitle">Практическое руководство по питанию на каждый день: убираем резкие скачки глюкозы и заменяем их стабильной, ровной энергией</p>
 
-<!-- ======================= СОДЕРЖАНИЕ ======================= -->
-<section id="page-toc" class="page">
-  <div class="book">
-    <div class="book-inner">
-      <nav class="breadcrumbs" aria-label="Навигация">
-        <a onclick="goToPage('page-title')">Главная</a>
-        <span class="sep">›</span>
-        <span class="current">Содержание</span>
-      </nav>
-
-      <p class="chapter-kicker">Оглавление</p>
-      <h2 class="chapter-title">Содержание</h2>
-      <p class="chapter-sub">Шесть разделов: от базовых правил и «светофора продуктов» до простых рецептов и плана контроля.</p>
-
-      <div class="toc-list">
-        <button class="toc-item" onclick="goToPage('page-intro')">
-          <span class="toc-num">❧</span>
-          <span class="toc-label">Введение. Зачем нужна эта памятка</span>
-          <span class="toc-arrow">→</span>
-        </button>
-        <button class="toc-item" onclick="goToPage('page-part1')">
-          <span class="toc-num">01</span>
-          <span class="toc-label">Часть 1. Четыре главных правила на каждый день</span>
-          <span class="toc-arrow">→</span>
-        </button>
-        <button class="toc-item" onclick="goToPage('page-part2')">
-          <span class="toc-num">02</span>
-          <span class="toc-label">Часть 2. Светофор продуктов: что выбираем, а что исключаем</span>
-          <span class="toc-arrow">→</span>
-        </button>
-        <button class="toc-item" onclick="goToPage('page-part3')">
-          <span class="toc-num">03</span>
-          <span class="toc-label">Часть 3. Питьевой режим: как правильно пить воду</span>
-          <span class="toc-arrow">→</span>
-        </button>
-        <button class="toc-item" onclick="goToPage('page-part4')">
-          <span class="toc-num">04</span>
-          <span class="toc-label">Часть 4. Простые рецепты на день</span>
-          <span class="toc-arrow">→</span>
-        </button>
-        <button class="toc-item" onclick="goToPage('page-part5')">
-          <span class="toc-num">05</span>
-          <span class="toc-label">Часть 5. Инструкция по контролю: что делать дальше?</span>
-          <span class="toc-arrow">→</span>
-        </button>
-      </div>
-
-      <div class="toc-actions">
-        <button class="btn btn-ghost" onclick="goToPage('page-title')">На главную</button>
-        <button class="btn btn-primary" onclick="goToPage('page-intro')">Начать чтение</button>
+    <div class="plate-wrap">
+      <div class="plate" aria-hidden="true">
+        <div class="plate-leaf"></div>
       </div>
     </div>
+
+    <button class="btn btn-primary btn-big" onclick="goToPage('toc')">Прочитать</button>
+
+    <p class="hero-note">Любые изменения в диете — это отличный шаг для поддержки организма, но они не отменяют обязательную очную консультацию врача-эндокринолога и сдачу повторных лабораторных анализов.</p>
   </div>
 </section>
 
-<!-- ======================= ВВЕДЕНИЕ ======================= -->
-<section id="page-intro" class="page">
-  <div class="book">
-    <div class="book-inner">
-      <nav class="breadcrumbs" aria-label="Навигация">
-        <a onclick="goToPage('page-title')">Главная</a>
-        <span class="sep">›</span>
-        <a onclick="goToPage('page-toc')">Содержание</a>
-        <span class="sep">›</span>
-        <span class="current">Введение</span>
-      </nav>
+<!-- ================= TABLE OF CONTENTS ================= -->
+<section class="page" id="page-toc">
+  <div class="wrap">
+    <nav aria-label="Хлебные крошки">
+      <ul class="crumbs">
+        <li><button onclick="goToPage('title')">Главная</button></li>
+        <li><span class="sep">›</span></li>
+        <li><span class="current">Содержание</span></li>
+      </ul>
+    </nav>
 
-      <p class="chapter-kicker">Введение</p>
-      <h2 class="chapter-title">Зачем нужна эта памятка</h2>
-      <p class="chapter-sub">Практическое руководство по питанию на каждый день — без жёстких диет и сложных таблиц.</p>
+    <div class="card">
+      <h2 class="page-title-h">Содержание</h2>
+      <p class="page-sub">Шесть частей: от четырёх главных правил — к светофору продуктов, питьевому режиму, простым рецептам и плану контроля.</p>
 
-      <div class="book-text">
-        <p>Эта памятка — практическое руководство по питанию на каждый день. Главная цель — исключить продукты, которые вызывают резкие скачки сахара, и заменить их на те, которые усваиваются медленно и дают стабильную энергию.</p>
+      <ul class="toc-list">
+        <li>
+          <button class="toc-item" onclick="goToPage('intro')">
+            <span class="toc-num">01</span>
+            <span class="toc-text">
+              <span class="toc-title">Введение</span>
+              <span class="toc-sub">Главная цель памятки и важное предупреждение</span>
+            </span>
+            <span class="toc-arrow">→</span>
+          </button>
+        </li>
+        <li>
+          <button class="toc-item" onclick="goToPage('part1')">
+            <span class="toc-num">02</span>
+            <span class="toc-text">
+              <span class="toc-title">Часть 1. Четыре главных правила на каждый день</span>
+              <span class="toc-sub">Правило тарелки, контроль углеводов, волокна, приготовление круп</span>
+            </span>
+            <span class="toc-arrow">→</span>
+          </button>
+        </li>
+        <li>
+          <button class="toc-item" onclick="goToPage('part2')">
+            <span class="toc-num">03</span>
+            <span class="toc-text">
+              <span class="toc-title">Часть 2. Светофор продуктов</span>
+              <span class="toc-sub">Что выбираем, а что ограничиваем</span>
+            </span>
+            <span class="toc-arrow">→</span>
+          </button>
+        </li>
+        <li>
+          <button class="toc-item" onclick="goToPage('part3')">
+            <span class="toc-num">04</span>
+            <span class="toc-text">
+              <span class="toc-title">Часть 3. Питьевой режим: как правильно пить воду</span>
+              <span class="toc-sub">Вода, режим дня и полный запрет на сладкие напитки</span>
+            </span>
+            <span class="toc-arrow">→</span>
+          </button>
+        </li>
+        <li>
+          <button class="toc-item" onclick="goToPage('part4')">
+            <span class="toc-num">05</span>
+            <span class="toc-text">
+              <span class="toc-title">Часть 4. Простые рецепты на день</span>
+              <span class="toc-sub">Завтрак, обед и ужин из доступных продуктов</span>
+            </span>
+            <span class="toc-arrow">→</span>
+          </button>
+        </li>
+        <li>
+          <button class="toc-item" onclick="goToPage('part5')">
+            <span class="toc-num">06</span>
+            <span class="toc-text">
+              <span class="toc-title">Часть 5. Инструкция по контролю: что делать дальше?</span>
+              <span class="toc-sub">Повторный анализ, гликированный гемоглобин, самоконтроль</span>
+            </span>
+            <span class="toc-arrow">→</span>
+          </button>
+        </li>
+      </ul>
+
+      <div class="nav-row">
+        <button class="btn btn-ghost" onclick="goToPage('title')">На главную</button>
+        <span class="spacer"></span>
+        <button class="btn btn-primary" onclick="goToPage('intro')">Начать чтение →</button>
+      </div>
+    </div>
+
+    <p class="footer-note">Книга-памятка носит информационный характер и не заменяет консультацию врача.</p>
+  </div>
+</section>
+
+<!-- ================= INTRO ================= -->
+<section class="page" id="page-intro">
+  <div class="wrap">
+    <nav aria-label="Хлебные крошки">
+      <ul class="crumbs">
+        <li><button onclick="goToPage('title')">Главная</button></li>
+        <li><span class="sep">›</span></li>
+        <li><button onclick="goToPage('toc')">Содержание</button></li>
+        <li><span class="sep">›</span></li>
+        <li><span class="current">Введение</span></li>
+      </ul>
+    </nav>
+
+    <div class="card">
+      <h2 class="page-title-h">Введение</h2>
+      <p class="page-sub">Практическое руководство по питанию на каждый день</p>
+
+      <div class="prose">
+        <p class="dropcap">Эта памятка — практическое руководство по питанию на каждый день. Главная цель — исключить продукты, которые вызывают резкие скачки сахара, и заменить их на те, которые усваиваются медленно и дают стабильную, ровную энергию.</p>
 
         <div class="callout">
-          <p><strong>Важно:</strong> Любые изменения в диете — это отличный шаг для поддержки организма, но они не отменяют обязательную очную консультацию врача-эндокринолога и сдачу повторных анализов.</p>
+          <p><strong>Важно:</strong> любые изменения в диете — это отличный шаг для поддержки организма, но они не отменяют обязательную очную консультацию врача-эндокринолога и сдачу повторных лабораторных анализов.</p>
         </div>
       </div>
 
-      <nav class="page-nav">
-        <button class="btn btn-ghost" onclick="goToPage('page-toc')">← Предыдущая глава</button>
-        <button class="btn btn-primary" onclick="goToPage('page-part1')">Читать дальше →</button>
-      </nav>
+      <div class="nav-row">
+        <button class="btn btn-ghost" onclick="goToPage('toc')">← Содержание</button>
+        <span class="spacer"></span>
+        <button class="btn btn-primary" onclick="goToPage('part1')">Читать дальше →</button>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ======================= ЧАСТЬ 1 ======================= -->
-<section id="page-part1" class="page">
-  <div class="book">
-    <div class="book-inner">
-      <nav class="breadcrumbs" aria-label="Навигация">
-        <a onclick="goToPage('page-title')">Главная</a>
-        <span class="sep">›</span>
-        <a onclick="goToPage('page-toc')">Содержание</a>
-        <span class="sep">›</span>
-        <span class="current">Часть 1. Четыре главных правила</span>
-      </nav>
+<!-- ================= PART 1 ================= -->
+<section class="page" id="page-part1">
+  <div class="wrap">
+    <nav aria-label="Хлебные крошки">
+      <ul class="crumbs">
+        <li><button onclick="goToPage('title')">Главная</button></li>
+        <li><span class="sep">›</span></li>
+        <li><button onclick="goToPage('toc')">Содержание</button></li>
+        <li><span class="sep">›</span></li>
+        <li><span class="current">Часть 1. Четыре главных правила</span></li>
+      </ul>
+    </nav>
 
-      <p class="chapter-kicker">Часть 1</p>
-      <h2 class="chapter-title">Четыре главных правила на каждый день</h2>
-      <p class="chapter-sub">Каждый приём пищи — это простое решение, которое удерживает сахар на ровном уровне.</p>
+    <div class="card">
+      <h2 class="page-title-h">Часть 1. Четыре главных правила на каждый день</h2>
+      <p class="page-sub">Базовые принципы, которые работают каждый день и не требуют сложных подсчётов</p>
 
-      <div class="book-text">
-        <ul class="rules">
-          <li><strong>Правило тарелки.</strong> При каждом основном приеме пищи (завтрак, обед, ужин) делите тарелку на части. Половину тарелки должны занимать свежие овощи или зелень. Одну четверть — белковая еда (мясо, рыба или яйца). Оставшуюся четверть — полезный гарнир (гречка, перловка).</li>
-          <li><strong>Никакого «углеводного мусора».</strong> Полностью исключите из рациона чистый сахар, покупные сладости, газированные напитки, пакетированные соки и выпечку из белой муки высшего сорта. Эти продукты бьют по поджелудочной железе сильнее всего.</li>
-          <li><strong>Дробный режим.</strong> Старайтесь есть небольшими порциями 4–5 раз в день. Это помогает организму вовремя справляться с нагрузкой и удерживает сахар на стабильном, ровном уровне без резких падений и взлетов.</li>
-          <li><strong>Больше клетчатки.</strong> Добавляйте в рацион отруби, бобовые и свежую зелень. Растительные волокна работают как естественный фильтр — они замедляют всасывание сахара в кишечнике.</li>
+      <ul class="rules">
+        <li>
+          <strong>Правило тарелки.</strong> При каждом основном приеме пищи (завтрак, обед, ужин) мысленно делите тарелку на части. Половину тарелки должны занимать свежие или тушеные овощи, домашняя зелень, квашеная капуста. Одну четверть — белковая еда (курица, индейка, рыба или яйца). Оставшуюся четверть — полезный гарнир из цельных круп.
+        </li>
+        <li>
+          <strong>Контроль углеводного потока.</strong> Организм гораздо легче справляется с нагрузкой, если еда поступает небольшими порциями 4–5 раз в день. Не допускайте долгих перерывов и чувства сильного голода. Самое важное — полностью убрать продукты, которые мгновенно поднимают уровень глюкозы: чистый сахар, покупное печенье, сдобные булки и сладкие напитки.
+        </li>
+        <li>
+          <strong>Сила растительных волокон.</strong> Местные сезонные овощи и зелень богаты клетчаткой. Она работает в кишечнике как природный замедлитель: не позволяет сахару из пищи быстро всасываться в кровь, обеспечивая ровный уровень энергии без резких колебаний.
+        </li>
+        <li>
+          <strong>Правильное приготовление круп.</strong> Овсянку, гречку и перловку выбирайте самого крупного помола. Варите каши так, чтобы зерно оставалось слегка плотным. Переваренные, слишком горячие каши моментально отдают сахар организму, а слегка недоваренные и теплые — усваиваются медленно и правильно.
+        </li>
+      </ul>
+
+      <div class="nav-row">
+        <button class="btn btn-ghost" onclick="goToPage('intro')">← Предыдущая глава</button>
+        <span class="spacer"></span>
+        <button class="btn btn-primary" onclick="goToPage('part2')">Читать дальше →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PART 2 ================= -->
+<section class="page" id="page-part2">
+  <div class="wrap">
+    <nav aria-label="Хлебные крошки">
+      <ul class="crumbs">
+        <li><button onclick="goToPage('title')">Главная</button></li>
+        <li><span class="sep">›</span></li>
+        <li><button onclick="goToPage('toc')">Содержание</button></li>
+        <li><span class="sep">›</span></li>
+        <li><span class="current">Часть 2. Светофор продуктов</span></li>
+      </ul>
+    </nav>
+
+    <div class="card">
+      <h2 class="page-title-h">Часть 2. Светофор продуктов: что выбираем, а что ограничиваем</h2>
+      <p class="page-sub">Простой список вместо сложных таблиц</p>
+
+      <div class="prose">
+        <p class="dropcap">Используйте этот простой список вместо сложных таблиц. Все продукты разделены по принципу их влияния на уровень глюкозы в крови.</p>
+      </div>
+
+      <div class="legend">
+        <span class="chip chip-g">Зелёный — можно смело</span>
+        <span class="chip chip-y">Жёлтый — строго ограничивать</span>
+        <span class="chip chip-r">Красный — исключить</span>
+      </div>
+
+      <h3>Овощи и свежая зелень</h3>
+      <ul class="food">
+        <li class="g">
+          <span class="tag t-g">Зелёный список</span><strong>Можно есть смело:</strong> белокочанная капуста (свежая и тушеная), цветная капуста, брокколи. Свежие огурцы, кабачки, баклажаны, томаты. Квашеная капуста (без добавления сахара при закваске). Свежий укроп, петрушка, лук с грядки.
+        </li>
+        <li class="y">
+          <span class="tag t-y">Жёлтый список</span><strong>Строго ограничивать порции:</strong> картофель (только предварительно вымоченный в воде от крахмала 2–3 часа, отваренный в мундире или запеченный кубиками, и обязательно охлажденный — не более 1–2 штук в день). Отварная морковь, отварная свекла и отварная тыква (в горячем виде сильно поднимают сахар, допустимы редко и понемногу в остывшем состоянии в составе салатов).
+        </li>
+        <li class="r">
+          <span class="tag t-r">Красный список</span><strong>Полностью исключить:</strong> картофельное пюре, жареный картофель, консервированный зеленый горошек и кукурузу.
+        </li>
+      </ul>
+
+      <h3>Крупы, каши и бобовые</h3>
+      <ul class="food">
+        <li class="g">
+          <span class="tag t-g">Зелёный список</span><strong>Полезные углеводы:</strong> гречневая крупа (ядрица), перловая крупа, цельный овес (длительной варки от 20 минут, но не хлопья). Горох, чечевица, фасоль.
+        </li>
+        <li class="y">
+          <span class="tag t-y">Жёлтый список</span><strong>Умеренно:</strong> макаронные изделия из твердых сортов пшеницы (слегка недоваренные, употреблять в остывшем виде).
+        </li>
+        <li class="r">
+          <span class="tag t-r">Красный список</span><strong>Полностью исключить:</strong> белый шлифованный рис, манную крупу, овсяные и кукурузные хлопья быстрого приготовления, сладкие мюсли.
+        </li>
+      </ul>
+
+      <h3>Мясо, рыба и белковые продукты</h3>
+      <ul class="food">
+        <li class="g">
+          <span class="tag t-g">Зелёный список</span><strong>Основа сытости и мышц:</strong> доступная морская рыба (хек, минтай, треска) и местная речная рыба (судак, щука, окунь) в отварном или запеченном виде. Курица, индейка, нежирная телятина. Натуральные субпродукты (печень, сердце). Куриные и перепелиные яйца.
+        </li>
+        <li class="r">
+          <span class="tag t-r">Красный список</span><strong>Полностью исключить:</strong> жирную свинину, утку. Любые магазинные полуфабрикаты, колбасы, сосиски, покупные паштеты и мясные консервы в масле. Жареное на смальце мясо.
+        </li>
+      </ul>
+
+      <h3>Молочные продукты</h3>
+      <ul class="food">
+        <li class="g">
+          <span class="tag t-g">Зелёный список</span><strong>Без добавленного сахара:</strong> натуральный кефир, простокваша, домашний творог умеренной жирности (до 5%), классический йогурт без подсластителей и фруктовых добавок. Твердые и полутвердые сыры (жирностью до 30%).
+        </li>
+        <li class="r">
+          <span class="tag t-r">Красный список</span><strong>Полностью исключить:</strong> глазированные сладкие сырки, йогурты с фруктовыми наполнителями, сгущенное молоко, жирную сметану и сливки.
+        </li>
+      </ul>
+
+      <h3>Фрукты и ягоды</h3>
+      <ul class="food">
+        <li class="g">
+          <span class="tag t-g">Зелёный список</span><strong>Самые безопасные:</strong> лесные ягоды (черника, клюква, брусника). Они содержат минимум сахаров и полезны для зрения и сосудов.
+        </li>
+        <li class="y">
+          <span class="tag t-y">Жёлтый список</span><strong>Умеренно, 1 штука в день в первой половине дня:</strong> местные яблоки (зеленые, кисло-сладких сортов), груши, цитрусовые (грейпфрут). Малина и вишня (небольшая горсть).
+        </li>
+      </ul>
+
+      <h3>Хлеб и выпечка</h3>
+      <ul class="food">
+        <li class="g">
+          <span class="tag t-g">Зелёный список</span><strong>В ограниченном количестве:</strong> ржаной хлеб, цельнозерновой хлеб или хлеб из муки второго сорта с добавлением отрубей (не более 2–3 кусочков в день).
+        </li>
+        <li class="r">
+          <span class="tag t-r">Красный список</span><strong>Полностью исключить:</strong> белый хлеб, батон, любую сдобную выпечку, пирожки, сушки, сухари из муки высшего сорта.
+        </li>
+      </ul>
+
+      <h3>Жиры</h3>
+      <ul class="food">
+        <li class="g">
+          <span class="tag t-g">Зелёный список</span><strong>Для здоровья сосудов:</strong> рафинированное рапсовое масло (идеально для безопасной тепловой обработки — тушения и запекания). Нерафинированное льняное и горчичное масло (добавлять строго в холодные овощные салаты и уже готовые остывшие каши). Грецкие орехи (3–4 штуки в день).
+        </li>
+        <li class="r">
+          <span class="tag t-r">Красный список</span><strong>Полностью исключить:</strong> майонез, маргарин, рафинированное подсолнечное масло для жарки, любой фастфуд.
+        </li>
+      </ul>
+
+      <div class="nav-row">
+        <button class="btn btn-ghost" onclick="goToPage('part1')">← Предыдущая глава</button>
+        <span class="spacer"></span>
+        <button class="btn btn-primary" onclick="goToPage('part3')">Читать дальше →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PART 3 ================= -->
+<section class="page" id="page-part3">
+  <div class="wrap">
+    <nav aria-label="Хлебные крошки">
+      <ul class="crumbs">
+        <li><button onclick="goToPage('title')">Главная</button></li>
+        <li><span class="sep">›</span></li>
+        <li><button onclick="goToPage('toc')">Содержание</button></li>
+        <li><span class="sep">›</span></li>
+        <li><span class="current">Часть 3. Питьевой режим</span></li>
+      </ul>
+    </nav>
+
+    <div class="card">
+      <h2 class="page-title-h">Часть 3. Питьевой режим: как правильно пить воду</h2>
+      <p class="page-sub">Почему вода важна при повышенном сахаре и как пить её правильно</p>
+
+      <div class="prose">
+        <p class="dropcap">При повышенном сахаре организм пытается вывести избыток глюкозы вместе с мочой, поэтому человек часто испытывает жажду. Правильный питьевой режим помогает почкам работать эффективно.</p>
+      </div>
+
+      <ul class="rules">
+        <li>
+          <strong>Главный напиток — чистая вода.</strong> Общий объем жидкости должен составлять около 1,5 литров в день (если нет противоположных ограничений от лечащего кардиолога). Сюда относится чистая негазированная вода, слабый зеленый чай или отвар шиповника без сахара.
+        </li>
+        <li>
+          <strong>Стакан воды после сна.</strong> Начинайте утро со стакана теплой чистой воды. Это мягко запускает работу желудочно-кишечного тракта и нормализует густоту крови после ночи.
+        </li>
+        <li>
+          <strong>Контроль в течение дня.</strong> Пейте равномерно, по несколько глотков каждые 30–40 минут. Не доводите организм до чувства сильной жажды — это признак начавшегося обезвоживания.
+        </li>
+        <li>
+          <strong>Вода и еда.</strong> Выпивайте стакан воды за 20–30 минут до приема пищи. Во время самой еды допускается делать лишь 2–3 небольших глотка чистой воды, чтобы не разбавлять желудочный сок и не ухудшать переваривание пищи.
+        </li>
+        <li>
+          <strong>Что под полным запретом?</strong> Пакетированные соки, любые сладкие газировки, квас и напитки с добавлением сахара. Даже домашний морс из ягод без сахара содержит концентрированную фруктозу. Вместо морса лучше съесть горсть свежих лесных ягод.
+        </li>
+      </ul>
+
+      <div class="nav-row">
+        <button class="btn btn-ghost" onclick="goToPage('part2')">← Предыдущая глава</button>
+        <span class="spacer"></span>
+        <button class="btn btn-primary" onclick="goToPage('part4')">Читать дальше →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PART 4 ================= -->
+<section class="page" id="page-part4">
+  <div class="wrap">
+    <nav aria-label="Хлебные крошки">
+      <ul class="crumbs">
+        <li><button onclick="goToPage('title')">Главная</button></li>
+        <li><span class="sep">›</span></li>
+        <li><button onclick="goToPage('toc')">Содержание</button></li>
+        <li><span class="sep">›</span></li>
+        <li><span class="current">Часть 4. Простые рецепты на день</span></li>
+      </ul>
+    </nav>
+
+    <div class="card">
+      <h2 class="page-title-h">Часть 4. Простые рецепты на день</h2>
+      <p class="page-sub">Минимум быстрых углеводов, доступные местные продукты и долгое чувство сытости</p>
+
+      <div class="prose">
+        <p class="dropcap">Эти блюда содержат минимум быстрых углеводов, состоят из доступных местных продуктов и надолго сохраняют чувство сытости.</p>
+      </div>
+
+      <div class="recipe">
+        <h3>Завтрак: Сытный ржаной бутерброд и яйцо</h3>
+
+        <p class="recipe-label">Ингредиенты</p>
+        <ul>
+          <li>2 куриных яйца</li>
+          <li>1 ломтик ржаного отрубного хлеба</li>
+          <li>1 чайная ложка горчичного или льняного масла</li>
+          <li>Свежая морковь и белокочанная капуста для легкого гарнира</li>
         </ul>
-      </div>
 
-      <nav class="page-nav">
-        <button class="btn btn-ghost" onclick="goToPage('page-intro')">← Предыдущая глава</button>
-        <button class="btn btn-primary" onclick="goToPage('page-part2')">Читать дальше →</button>
-      </nav>
-    </div>
-  </div>
-</section>
-
-<!-- ======================= ЧАСТЬ 2 ======================= -->
-<section id="page-part2" class="page">
-  <div class="book">
-    <div class="book-inner">
-      <nav class="breadcrumbs" aria-label="Навигация">
-        <a onclick="goToPage('page-title')">Главная</a>
-        <span class="sep">›</span>
-        <a onclick="goToPage('page-toc')">Содержание</a>
-        <span class="sep">›</span>
-        <span class="current">Часть 2. Светофор продуктов</span>
-      </nav>
-
-      <p class="chapter-kicker">Часть 2</p>
-      <h2 class="chapter-title">Светофор продуктов: что выбираем, а что исключаем</h2>
-      <p class="chapter-sub">Простой список вместо сложных таблиц.</p>
-
-      <div class="book-text">
-        <p>Используйте этот простой список вместо сложных таблиц.</p>
-
-        <h3>Овощи и свежая зелень</h3>
-        <div class="switcher">
-          <div class="sw-card sw-green">
-            <p class="sw-title">Зелёный список <span>можно есть смело</span></p>
-            <ul>
-              <li>Белокочанная, цветная капуста и брокколи.</li>
-              <li>Свежие огурцы, томаты, кабачки и баклажаны.</li>
-              <li>Листовой салат, шпинат и спаржа.</li>
-            </ul>
-          </div>
-          <div class="sw-card sw-red">
-            <p class="sw-title">Красный список <span>исключить</span></p>
-            <ul>
-              <li>Картофель в любом виде (особенно пюре и запеченный).</li>
-              <li>Отварная кукуруза.</li>
-              <li>Перезрелая вареная свекла.</li>
-            </ul>
-          </div>
-        </div>
-
-        <h3>Крупы, каши и бобовые</h3>
-        <div class="switcher">
-          <div class="sw-card sw-green">
-            <p class="sw-title">Зелёный список <span>полезные углеводы</span></p>
-            <ul>
-              <li>Гречневая и перловая крупы.</li>
-              <li>Цельная овсяная крупа (которую нужно варить долго, а не заливать кипятком).</li>
-              <li>Чечевица, нут, фасоль и маш.</li>
-            </ul>
-          </div>
-          <div class="sw-card sw-red">
-            <p class="sw-title">Красный список <span>исключить</span></p>
-            <ul>
-              <li>Белый шлифованный рис.</li>
-              <li>Манная крупа.</li>
-              <li>Кукурузные хлопья и быстрые сладкие мюсли.</li>
-            </ul>
-          </div>
-        </div>
-
-        <h3>Мясо, рыба и белковые продукты</h3>
-        <div class="switcher">
-          <div class="sw-card sw-green">
-            <p class="sw-title">Зелёный список <span>основа сытости</span></p>
-            <ul>
-              <li>Нежирная рыба (минтай, треска, хек) и умеренно жирная (семга, форель).</li>
-              <li>Куриная грудка, индейка, кролик и постная телятина.</li>
-              <li>Куриные и перепелиные яйца.</li>
-            </ul>
-          </div>
-          <div class="sw-card sw-red">
-            <p class="sw-title">Красный список <span>исключить</span></p>
-            <ul>
-              <li>Жирная свинина и утка.</li>
-              <li>Любые магазинные полуфабрикаты, колбасы, сосиски и мясные консервы.</li>
-              <li>Жареное на масле мясо.</li>
-            </ul>
-          </div>
-        </div>
-
-        <h3>Молочные продукты</h3>
-        <div class="switcher">
-          <div class="sw-card sw-green">
-            <p class="sw-title">Зелёный список <span>без добавленного сахара</span></p>
-            <ul>
-              <li>Натуральный греческий йогурт без добавок.</li>
-              <li>Кефир.</li>
-              <li>Нежирный творог (до 5%).</li>
-              <li>Твердые сыры (желательно с жирностью до 30%).</li>
-            </ul>
-          </div>
-          <div class="sw-card sw-red">
-            <p class="sw-title">Красный список <span>исключить</span></p>
-            <ul>
-              <li>Глазированные сладкие сырки.</li>
-              <li>Йогурты с фруктовыми наполнителями и вкусами.</li>
-              <li>Сгущенное молоко.</li>
-              <li>Жирные сливки.</li>
-            </ul>
-          </div>
-        </div>
-
-        <h3>Фрукты и ягоды</h3>
-        <div class="switcher">
-          <div class="sw-card sw-green">
-            <p class="sw-title">Зелёный список <span>в умеренном количестве</span></p>
-            <ul>
-              <li>Зеленые яблоки и груши.</li>
-              <li>Цитрусовые (грейпфруты, апельсины).</li>
-              <li>Черника, малина и вишня.</li>
-            </ul>
-          </div>
-          <div class="sw-card sw-red">
-            <p class="sw-title">Красный список <span>исключить</span></p>
-            <ul>
-              <li>Виноград, арбуз, дыня.</li>
-              <li>Хурма и спелые бананы.</li>
-              <li>Все виды сухофруктов (финики, изюм, инжир).</li>
-            </ul>
-          </div>
-        </div>
-
-        <h3>Хлеб и выпечка</h3>
-        <div class="switcher">
-          <div class="sw-card sw-green">
-            <p class="sw-title">Зелёный список <span>ограниченно</span></p>
-            <ul>
-              <li>Цельнозерновой хлеб.</li>
-              <li>Хлеб с добавлением отрубей.</li>
-              <li>Хлеб из ржаной муки второго сорта.</li>
-            </ul>
-          </div>
-          <div class="sw-card sw-red">
-            <p class="sw-title">Красный список <span>исключить</span></p>
-            <ul>
-              <li>Белый хлеб, батон.</li>
-              <li>Любая сдобная выпечка, пирожки, сушки.</li>
-              <li>Сухари из пшеничной муки высшего сорта.</li>
-            </ul>
-          </div>
-        </div>
-
-        <h3>Жиры и орехи</h3>
-        <div class="switcher">
-          <div class="sw-card sw-green">
-            <p class="sw-title">Зелёный список <span>для здоровья сосудов</span></p>
-            <ul>
-              <li>Авокадо.</li>
-              <li>Оливковое и льняное масло для заправки салатов.</li>
-              <li>Грецкие орехи, миндаль, фундук (не более одной горсти — 30–40 грамм в день).</li>
-            </ul>
-          </div>
-          <div class="sw-card sw-red">
-            <p class="sw-title">Красный список <span>исключить</span></p>
-            <ul>
-              <li>Майонез и маргарин.</li>
-              <li>Рафинированное подсолнечное масло для жарки.</li>
-              <li>Любой фастфуд.</li>
-            </ul>
-          </div>
+        <p class="recipe-label">Приготовление</p>
+        <div class="prose">
+          <p>Отварить два яйца всмятку или вкрутую. Ломтик ржаного хлеба слегка сбрызнуть горчичным или льняным маслом. Сделать салат из свежей тертой моркови и мелко шинкованной капусты, заправив его капелькой масла. Такой завтрак богат белком и правильной клетчаткой, что обеспечивает стабильный сахар до самого обеда.</p>
         </div>
       </div>
 
-      <nav class="page-nav">
-        <button class="btn btn-ghost" onclick="goToPage('page-part1')">← Предыдущая глава</button>
-        <button class="btn btn-primary" onclick="goToPage('page-part3')">Читать дальше →</button>
-      </nav>
-    </div>
-  </div>
-</section>
+      <div class="recipe">
+        <h3>Обед: Запеченный хек с перловкой и квашеной капустой</h3>
 
-<!-- ======================= ЧАСТЬ 3 ======================= -->
-<section id="page-part3" class="page">
-  <div class="book">
-    <div class="book-inner">
-      <nav class="breadcrumbs" aria-label="Навигация">
-        <a onclick="goToPage('page-title')">Главная</a>
-        <span class="sep">›</span>
-        <a onclick="goToPage('page-toc')">Содержание</a>
-        <span class="sep">›</span>
-        <span class="current">Часть 3. Питьевой режим</span>
-      </nav>
-
-      <p class="chapter-kicker">Часть 3</p>
-      <h2 class="chapter-title">Питьевой режим: как правильно пить воду</h2>
-      <p class="chapter-sub">Вода — главный помощник при повышенном сахаре.</p>
-
-      <div class="book-text">
-        <p>При повышенном сахаре организм пытается вывести избыток глюкозы вместе с мочой, поэтому человек часто испытывает жажду. Правильный питьевой режим критически важен.</p>
-
-        <ul class="dot-list">
-          <li><strong>Главный напиток — чистая вода.</strong> Общий объем жидкости должен составлять около 1,5–2 литров в день (если нет противопоказаний от кардиолога или уролога). Сюда относится чистая негазированная вода, слабый травяной или зеленый чай.</li>
-          <li><strong>Стакан воды после сна.</strong> Начинайте утро со стакана теплой чистой воды. Это запускает работу желудочно-кишечного тракта и разжижает кровь.</li>
-          <li><strong>Контроль в течение дня.</strong> Пейте равномерно, по несколько глотков каждые 30–40 минут. Не доводите организм до чувства сильной жажды — это признак начавшегося обезвоживания.</li>
-          <li><strong>Вода и еда.</strong> Выпивайте стакан воды за 20–30 минут до приема пищи. Это помогает не переедать. Во время еды пить можно, но понемногу и только чистую воду, а не сладкие компоты.</li>
-          <li><strong>Что под полным запретом?</strong> Пакетированные соки, любые сладкие газировки, квас, пиво и напитки с добавлением сиропов или сахара. Даже домашний морс без сахара содержит много фруктозы, которая быстро поднимает глюкозу.</li>
+        <p class="recipe-label">Ингредиенты</p>
+        <ul>
+          <li>150 г филе хека (или минтая)</li>
+          <li>35 г сухой перловой крупы</li>
+          <li>100 г домашней квашеной капусты (без сахара)</li>
+          <li>Сушеный укроп</li>
+          <li>1 чайная ложка рапсового масла</li>
         </ul>
+
+        <p class="recipe-label">Приготовление</p>
+        <div class="prose">
+          <p>Филе рыбы присыпать сушеным укропом, слегка присолить и запечь в фольге в духовке с добавлением чайной ложки рапсового масла (20 минут при 180 градусах). Перловую крупу отварить так, чтобы зерно осталось упругим, не разваривая в кашу-размазню. Выложить на тарелку готовую рыбу, умеренную порцию перловки и квашеную капусту. Квашеная капуста содержит молочную кислоту, которая помогает организму правильно усваивать углеводы из гарнира.</p>
+        </div>
       </div>
 
-      <nav class="page-nav">
-        <button class="btn btn-ghost" onclick="goToPage('page-part2')">← Предыдущая глава</button>
-        <button class="btn btn-primary" onclick="goToPage('page-part4')">Читать дальше →</button>
-      </nav>
+      <div class="recipe">
+        <h3>Ужин: Нежные куриные биточки с тушеным кабачком</h3>
+
+        <p class="recipe-label">Ингредиенты</p>
+        <ul>
+          <li>200 г домашнего фарша из куриной грудки</li>
+          <li>1 небольшая луковица</li>
+          <li>1 средний кабачок</li>
+          <li>Свежая зелень (укроп, петрушка)</li>
+          <li>1 чайная ложка рапсового масла для тушения</li>
+        </ul>
+
+        <p class="recipe-label">Приготовление</p>
+        <div class="prose">
+          <p>В куриный фарш мелко накрошить лук, сформировать небольшие биточки и приготовить их на пару или потушить в кастрюле с добавлением небольшого количества воды. На гарнир нарезать кубиками кабачок и слегка потушить его на рапсовом масле с добавлением свежей зелени. Это легкий, идеальный ужин, который не перегружает поджелудочную железу перед сном и защищает от ночного чувства голода.</p>
+        </div>
+      </div>
+
+      <div class="nav-row">
+        <button class="btn btn-ghost" onclick="goToPage('part3')">← Предыдущая глава</button>
+        <span class="spacer"></span>
+        <button class="btn btn-primary" onclick="goToPage('part5')">Читать дальше →</button>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- ======================= ЧАСТЬ 4 ======================= -->
-<section id="page-part4" class="page">
-  <div class="book">
-    <div class="book-inner">
-      <nav class="breadcrumbs" aria-label="Навигация">
-        <a onclick="goToPage('page-title')">Главная</a>
-        <span class="sep">›</span>
-        <a onclick="goToPage('page-toc')">Содержание</a>
-        <span class="sep">›</span>
-        <span class="current">Часть 4. Простые рецепты на день</span>
-      </nav>
+<!-- ================= PART 5 ================= -->
+<section class="page" id="page-part5">
+  <div class="wrap">
+    <nav aria-label="Хлебные крошки">
+      <ul class="crumbs">
+        <li><button onclick="goToPage('title')">Главная</button></li>
+        <li><span class="sep">›</span></li>
+        <li><button onclick="goToPage('toc')">Содержание</button></li>
+        <li><span class="sep">›</span></li>
+        <li><span class="current">Часть 5. Инструкция по контролю</span></li>
+      </ul>
+    </nav>
 
-      <p class="chapter-kicker">Часть 4</p>
-      <h2 class="chapter-title">Простые рецепты на день</h2>
-      <p class="chapter-sub">Блюда, которые легко готовить и которые надолго сохраняют чувство сытости.</p>
+    <div class="card">
+      <h2 class="page-title-h">Часть 5. Инструкция по контролю: что делать дальше?</h2>
+      <p class="page-sub">Медицинский алгоритм действий при пограничном показателе сахара</p>
 
-      <div class="book-text">
-        <p>Эти блюда готовятся легко, содержат минимум быстрых углеводов и надолго сохраняют чувство сытости.</p>
-
-        <div class="recipe">
-          <p class="recipe-tag">Завтрак</p>
-          <h3 class="recipe-title">Пышный омлет с брокколи и сыром</h3>
-          <p><strong>Ингредиенты:</strong> 2 куриных яйца, 50 мл нежирного молока, 3–4 соцветия брокколи (свежей или замороженной), 20 г твердого сыра (до 30% жирности), 1 чайная ложка оливкового масла.</p>
-          <p><strong>Приготовление:</strong> Брокколи отварить в кипящей воде 3 минуты и нарезать кусочками. Яйца взбить с молоком. На сковороду капнуть оливковое масло, выложить брокколи и залить яичной смесью. Готовить под крышкой на небольшом огне 5–7 минут. За минуту до готовности посыпать тертым сыром. К завтраку можно добавить 1 ломтик цельнозернового хлеба.</p>
-        </div>
-
-        <div class="recipe">
-          <p class="recipe-tag">Обед</p>
-          <h3 class="recipe-title">Запеченная индейка с гречкой и свежим салатом</h3>
-          <p><strong>Ингредиенты:</strong> 150 г филе индейки (или куриной грудки), 50 г сухой гречневой крупы, 1 огурец, 1 томат, листовой салат, лимонный сок и 1 чайная ложка льняного или оливкового масла для заправки.</p>
-          <p><strong>Приготовление:</strong> Индейку слегка посолить, посыпать сухими травами (например, укропом) и запечь в духовке в фольге (около 25 минут при 180 градусах). Гречку отварить, но не разваривать в кашу (оставить чуть плотной). Сделать салат из огурца, томата и зелени, заправить маслом и каплей лимонного сока. Выложить на тарелку по «правилу тарелки»: половина — салат, четверть — гречка, четверть — индейка.</p>
-        </div>
-
-        <div class="recipe">
-          <p class="recipe-tag">Ужин</p>
-          <h3 class="recipe-title">Минтай на пару с кабачками и зеленью</h3>
-          <p><strong>Ингредиенты:</strong> 200 г филе минтая (эха или трески), 1 небольшой кабачок (или цукини), пучок свежей петрушки и укропа, долька лимона.</p>
-          <p><strong>Приготовление:</strong> Филе рыбы сбрызнуть лимонным соком, слегка присолить. Кабачок нарезать кружочками. Выложить рыбу и кабачки в пароварку или на решетку над кипящей водой в кастрюле. Готовить на пару 15 минут. Перед подачей обильно посыпать готовое блюдо мелко нарезанной свежей зеленью. Кабачки будут служить отличным легким гарниром, который не нагружает поджелудочную железу перед сном.</p>
-        </div>
+      <div class="prose">
+        <p class="dropcap">Если пограничный показатель сахара (7,11 ммоль/л) обнаружен впервые в жизни, паниковать не нужно, но важно действовать строго по медицинскому алгоритму. Однократный замер не является основанием для постановки окончательного диагноза, так как на него могли повлиять скрытые факторы (стресс, плохой сон, поздний или избыточный ужин накануне).</p>
       </div>
 
-      <nav class="page-nav">
-        <button class="btn btn-ghost" onclick="goToPage('page-part3')">← Предыдущая глава</button>
-        <button class="btn btn-primary" onclick="goToPage('page-part5')">Читать дальше →</button>
-      </nav>
-    </div>
-  </div>
-</section>
+      <h3>Шаг 1. Срочные действия и повторный анализ</h3>
+      <ul class="steps">
+        <li>
+          <strong>Когда пересдавать.</strong> Повторный анализ крови на глюкозу натощак нужно сдать через 1–2 недели на фоне соблюдения описанной выше умеренной диеты (без жесткого голодания, просто исключив явный сахар). Сдавать анализ нужно строго из вены в условиях лаборатории.
+        </li>
+        <li>
+          <strong>Золотой стандарт диагностики.</strong> Одновременно с повторным сахаром настоятельно рекомендуется сдать анализ на гликированный гемоглобин (HbA1c). Этот показатель отражает средний уровень сахара в крови за последние 3 месяца. Он самый надежный в эндокринологии, так как не зависит от случайных факторов, состава вчерашнего ужина или волнения перед процедурой.
+        </li>
+      </ul>
 
-<!-- ======================= ЧАСТЬ 5 ======================= -->
-<section id="page-part5" class="page">
-  <div class="book">
-    <div class="book-inner">
-      <nav class="breadcrumbs" aria-label="Навигация">
-        <a onclick="goToPage('page-title')">Главная</a>
-        <span class="sep">›</span>
-        <a onclick="goToPage('page-toc')">Содержание</a>
-        <span class="sep">›</span>
-        <span class="current">Часть 5. Инструкция по контролю</span>
-      </nav>
+      <h3>Шаг 2. Что делать, если следующий анализ будет в норме?</h3>
+      <ul class="steps">
+        <li>
+          <strong>Не расслабляться полностью.</strong> Если сахар вернулся к норме (ниже 6,1 ммоль/л из вены), это отличная новость. Она означает, что организм справляется, но скрытая склонность к нарушениям углеводного обмена уже проявила себя. Первичный «вылет» — это всегда предупреждение.
+        </li>
+        <li>
+          <strong>Тактика действий при норме.</strong> Возвращаться к прежнему питанию с обилием сладкого и выпечки нельзя. Нужно сохранить базовые принципы диеты (минимум быстрых углеводов, правило тарелки) в качестве постоянного, комфортного стиля жизни.
+        </li>
+        <li>
+          <strong>График проверок.</strong> При нормализации показателей кровь на сахар и гликированный гемоглобин нужно будет сдавать для контроля 1 раз в 6 месяцев.
+        </li>
+      </ul>
 
-      <p class="chapter-kicker">Часть 5</p>
-      <h2 class="chapter-title">Инструкция по контролю: что делать дальше?</h2>
-      <p class="chapter-sub">Если повышенный показатель обнаружен впервые — паниковать не нужно, но важно действовать по алгоритму.</p>
+      <h3>Шаг 3. Домашний самоконтроль (покупка глюкометра)</h3>
+      <ul class="steps">
+        <li>
+          <strong>Когда покупать прибор.</strong> Обзаводиться собственным портативным прибором стоит в том случае, если официальные повторные анализы в лаборатории подтвердят, что уровень сахара натощак действительно остался повышенным. Если врач-эндокринолог зафиксирует стабильное изменение углеводного обмена (преддиабет или начальную стадию диабета), портативный глюкометр станет вашим надежным домашним помощником. Покупать его заранее, до визита к врачу, не нужно, чтобы не создавать лишней суеты.
+        </li>
+        <li>
+          <strong>Схема замеров на этапе контроля.</strong> Если прибор необходим, замеры делают по схеме: утром строго натощак (норма до 5,6 ммоль/л по плазме), а также через 2 часа после основных приемов пищи (норма до 7,8 ммоль/л), чтобы увидеть, как организм справляется с нагрузкой.
+        </li>
+        <li>
+          <strong>Ведение дневника.</strong> Все показатели домашнего глюкометра вместе с краткими заметками о еде за день нужно записывать в блокнот. С этим дневником и результатами лабораторных анализов необходимо планово обратиться к врачу-эндокринологу для окончательных рекомендаций.
+        </li>
+      </ul>
 
-      <div class="book-text">
-        <p>Если повышенный показатель (7,11 ммоль/л) обнаружен впервые в жизни, паниковать не нужно, но важно действовать строго по алгоритму. Однократный замер не является основанием для постановки диагноза диабета, так как на него могли повлиять скрытые факторы (стресс, плохой сон, поздний ужин накануне).</p>
-
-        <div class="step">
-          <h3><span class="num">Шаг 1.</span> Срочные действия и повторный анализ</h3>
-          <ul class="dot-list">
-            <li><strong>Когда пересдавать:</strong> Повторный анализ крови на глюкозу натощак нужно сдать через 1-2 недели на фоне соблюдения умеренной диеты (без жесткого голодания, просто исключив явный сахар). Сдавать анализ нужно строго из вены в лаборатории.</li>
-            <li><strong>Золотой стандарт диагностики:</strong> Одновременно с повторным сахаром настоятельно рекомендуется сдать анализ на гликированный гемоглобин (HbA1c). Этот показатель отражает средний уровень сахара в крови за последние 3 месяца. Он самый надежный и не зависит от того, что папа ел вчера или понервничал ли он перед процедурой.</li>
-          </ul>
-        </div>
-
-        <div class="step">
-          <h3><span class="num">Шаг 2.</span> Что делать, если следующий анализ будет в норме?</h3>
-          <ul class="dot-list">
-            <li><strong>Не расслабляться полностью:</strong> Если сахар вернулся к норме (ниже 6,1 ммоль/л из вены), это отличная новость. Она означает, что организм справляется, но скрытая склонность к нарушениям углеводного обмена уже есть. Первичный «вылет» — это всегда предупреждение.</li>
-            <li><strong>Тактика действий при норме:</strong> Возвращаться к привычному питанию с обилием сладкого и выпечки нельзя. Нужно сохранить базовые принципы диеты (минимум быстрых углеводов) в качестве постоянного стиля жизни.</li>
-            <li><strong>График проверок:</strong> При нормализации показателей кровь на сахар и гликированный гемоглобин нужно будет сдавать для контроля 1 раз в 6 месяцев.</li>
-          </ul>
-        </div>
-
-        <div class="step">
-          <h3><span class="num">Шаг 3.</span> Как контролировать уровень сахара дома?</h3>
-          <ul class="dot-list">
-            <li><strong>Покупка глюкометра:</strong> Для домашнего использования стоит приобрести портативный глюкометр.</li>
-            <li><strong>Схема замеров на этапе контроля:</strong> В первое время (или при нестабильных результатах официальных анализов) замеры делают по схеме: утром натощак, а также через 2 часа после основных приемов пищи (чтобы увидеть, как организм справляется с нагрузкой).</li>
-            <li><strong>Ведение дневника:</strong> Все показатели домашнего глюкометра вместе с краткими заметками о еде за день нужно записывать в блокнот. С этим дневником и результатами лабораторных анализов необходимо планово обратиться к врачу-эндокринологу. Именно врач сопоставит все данные и даст окончательное заключение.</li>
-          </ul>
-        </div>
+      <div class="nav-row">
+        <button class="btn btn-ghost" onclick="goToPage('part4')">← Предыдущая глава</button>
+        <span class="spacer"></span>
+        <button class="btn btn-primary" onclick="goToPage('title')">В начало книги ↺</button>
       </div>
-
-      <nav class="page-nav">
-        <button class="btn btn-ghost" onclick="goToPage('page-part4')">← Предыдущая глава</button>
-        <button class="btn btn-primary" onclick="goToPage('page-title')">В начало книги</button>
-      </nav>
     </div>
+
+    <p class="footer-note">Книга-памятка носит информационный характер и не заменяет консультацию врача-эндокринолога.</p>
   </div>
 </section>
 
 <script>
-  (function () {
-    'use strict';
+  /* ============ SPA NAVIGATION ============ */
+  var order = ['intro', 'part1', 'part2', 'part3', 'part4', 'part5'];
+  var currentPage = 'title';
 
-    var TITLES = {
-      'page-title': 'Книга-памятка: Здоровое питание для контроля сахара',
-      'page-toc': 'Содержание — Здоровое питание для контроля сахара',
-      'page-intro': 'Введение — Здоровое питание для контроля сахара',
-      'page-part1': 'Часть 1. Четыре главных правила — Здоровое питание для контроля сахара',
-      'page-part2': 'Часть 2. Светофор продуктов — Здоровое питание для контроля сахара',
-      'page-part3': 'Часть 3. Питьевой режим — Здоровое питание для контроля сахара',
-      'page-part4': 'Часть 4. Простые рецепты на день — Здоровое питание для контроля сахара',
-      'page-part5': 'Часть 5. Инструкция по контролю — Здоровое питание для контроля сахара'
-    };
+  function goToPage(pageKey) {
+    var pages = document.querySelectorAll('.page');
+    for (var i = 0; i < pages.length; i++) {
+      pages[i].style.display = 'none';
+    }
 
-    function scrollToTop() {
-      try {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      } catch (e) {
-        window.scrollTo(0, 0);
+    var target = document.getElementById('page-' + pageKey);
+    if (!target) {
+      return;
+    }
+
+    if (pageKey === 'title') {
+      target.style.display = 'flex';
+    } else {
+      target.style.display = 'block';
+    }
+
+    currentPage = pageKey;
+
+    var topbar = document.getElementById('topbar');
+    if (topbar) {
+      if (pageKey === 'title') {
+        topbar.classList.add('hidden');
+      } else {
+        topbar.classList.remove('hidden');
       }
     }
 
-    function goToPage(pageKey) {
-      var pages = document.querySelectorAll('.page');
-      for (var i = 0; i < pages.length; i++) {
-        pages[i].style.display = 'none';
-        pages[i].classList.remove('fade-in');
-      }
-
-      var target = document.getElementById(pageKey);
-      if (!target) {
-        pageKey = 'page-title';
-        target = document.getElementById('page-title');
-      }
-
-      target.style.display = (pageKey === 'page-title') ? 'flex' : 'block';
-
-      /* перезапуск анимации появления */
-      void target.offsetWidth;
-      target.classList.add('fade-in');
-
-      scrollToTop();
-
-      if (TITLES[pageKey]) {
-        document.title = TITLES[pageKey];
-      }
-
-      if (window.history && window.history.replaceState) {
-        try {
-          window.history.replaceState(null, '', '#' + pageKey);
-        } catch (e) { /* игнорируем ограничения file:// */ }
-      }
+    /* Плавная прокрутка наверх с запасным вариантом */
+    try {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch (e) {
+      window.scrollTo(0, 0);
     }
+  }
 
-    window.goToPage = goToPage;
+  function nextPage() {
+    var idx = order.indexOf(currentPage);
+    if (idx === -1) {
+      goToPage('intro');
+      return;
+    }
+    if (idx < order.length - 1) {
+      goToPage(order[idx + 1]);
+    } else {
+      goToPage('title');
+    }
+  }
 
-    /* Поддержка прямых ссылок с хешем */
-    window.addEventListener('load', function () {
-      var hash = (window.location.hash || '').replace('#', '');
-      if (hash) {
-        var el = document.getElementById(hash);
-        if (el && el.classList.contains('page')) {
-          goToPage(hash);
-        }
+  function prevPage() {
+    var idx = order.indexOf(currentPage);
+    if (idx === -1) {
+      goToPage('toc');
+      return;
+    }
+    if (idx > 0) {
+      goToPage(order[idx - 1]);
+    } else {
+      goToPage('toc');
+    }
+  }
+
+  /* Управление стрелками клавиатуры */
+  document.addEventListener('keydown', function (event) {
+    if (currentPage === 'title' || currentPage === 'toc') {
+      if (event.key === 'ArrowRight' && currentPage === 'toc') {
+        goToPage('intro');
       }
-    });
+      return;
+    }
+    if (event.key === 'ArrowRight') {
+      nextPage();
+    } else if (event.key === 'ArrowLeft') {
+      prevPage();
+    }
+  });
 
-    /* Навигация стрелками клавиатуры */
-    document.addEventListener('keydown', function (e) {
-      if (e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
-      var visible = null;
-      var pages = document.querySelectorAll('.page');
-      for (var i = 0; i < pages.length; i++) {
-        if (pages[i].style.display !== 'none' && pages[i].style.display !== '') {
-          visible = pages[i];
-          break;
-        }
-      }
-      if (!visible) return;
-      var nav = visible.querySelector('.page-nav');
-      if (!nav) return;
-      var buttons = nav.querySelectorAll('.btn');
-      if (!buttons.length) return;
-      var btn = (e.key === 'ArrowRight') ? buttons[buttons.length - 1] : buttons[0];
-      if (btn) btn.click();
-    });
-  })();
+  /* Стартовое состояние */
+  goToPage('title');
 </script>
-
 </body>
 </html>
